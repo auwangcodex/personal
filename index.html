@@ -129,6 +129,17 @@
       50% { opacity: 0.5; box-shadow: 0 0 12px var(--accent-cyan); }
     }
 
+    .nav-social {
+      display: flex;
+      align-items: center;
+      margin-left: 12px;
+      transition: color 0.3s;
+    }
+
+    .nav-social:hover {
+      color: var(--text-primary) !important;
+    }
+
     /* ─── Sections ─── */
     section {
       position: relative;
@@ -1076,6 +1087,71 @@
       .hero-metrics { gap: 24px; }
       .metric-value { font-size: 22px; }
     }
+
+    /* ─── Workflow Highlights ─── */
+    .workflow-highlights {
+      margin-top: 64px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 40px;
+      backdrop-filter: blur(12px);
+    }
+
+    .workflow-highlights-header {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .workflow-highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .workflow-highlight-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .wh-icon {
+      font-size: 28px;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(79,143,255,0.1);
+    }
+
+    .workflow-highlight-card:nth-child(1) .wh-icon { background: rgba(79,143,255,0.12); }
+    .workflow-highlight-card:nth-child(2) .wh-icon { background: rgba(139,92,246,0.12); }
+    .workflow-highlight-card:nth-child(3) .wh-icon { background: rgba(251,146,60,0.12); }
+
+    .wh-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .wh-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 768px) {
+      .workflow-highlights-grid { grid-template-columns: 1fr; }
+      .workflow-highlights { padding: 28px; }
+    }
   </style>
 </head>
 <body>
@@ -1094,6 +1170,17 @@
   <div class="nav-status">
     <span class="dot"></span>
     Open to opportunities
+    <a href="https://www.linkedin.com/in/austin-chen-wang-0b3161149/" target="_blank" class="nav-social" title="LinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text-dim); transition:color 0.3s;">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+    </a>
+    <a href="mailto:auwang@mba2027.hbs.edu" class="nav-social" title="Email">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-dim); transition:color 0.3s;">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </a>
   </div>
 </nav>
 
@@ -1112,8 +1199,8 @@
     HBS MBA candidate building at the intersection of AI and consumer products. I design, prototype, and ship AI-native experiences &mdash; from concept to interactive demo in hours, not months.
   </p>
   <div class="hero-cta-row">
-    <a href="#prototypes" class="btn-primary">View Prototypes &darr;</a>
-    <a href="#skills" class="btn-ghost">See My Claude Skills</a>
+    <a href="#skills" class="btn-primary">See Claude Skills &darr;</a>
+    <a href="#prototypes" class="btn-ghost">See Prototype Co-Pilot</a>
   </div>
   <div class="hero-metrics">
     <div class="metric">
@@ -1121,8 +1208,16 @@
       <span class="metric-label">Skills Pipeline</span>
     </div>
     <div class="metric">
-      <span class="metric-value">3+</span>
-      <span class="metric-label">AI Prototypes Built</span>
+      <span class="metric-value">&lt; 4hrs</span>
+      <span class="metric-label">Concept &rarr; Prototype</span>
+    </div>
+    <div class="metric">
+      <span class="metric-value">100K+</span>
+      <span class="metric-label">DAU Scaled (Sekai)</span>
+    </div>
+    <div class="metric">
+      <span class="metric-value">30%</span>
+      <span class="metric-label">D1 Retention Lift</span>
     </div>
     <div class="metric">
       <span class="metric-value">HBS '27</span>
@@ -1143,6 +1238,11 @@
     <p class="section-subtitle">
       Four AI-powered Claude Code skills that chain together into a complete product design pipeline. Research to deliverables in a single session.
     </p>
+    <p class="section-subtitle" style="margin-top:-16px; margin-bottom:20px; font-size:15px; color:var(--text-dim);">
+      <span style="color:var(--accent-cyan); font-weight:600;">&#x2699; Automated workflow</span> &nbsp;&middot;&nbsp;
+      <span style="color:var(--accent-purple); font-weight:600;">&#x1F50D; Deep research &amp; Five Whys analysis</span> &nbsp;&middot;&nbsp;
+      <span style="color:var(--accent-orange); font-weight:600;">&#x1F6D1; Human-in-the-loop checkpoints</span>
+    </p>
     <a href="https://github.com/auwangcodex/prototype-copilot" class="btn-ghost" target="_blank" style="margin-top:20px;">&#x1F4BB; View on GitHub &rarr;</a>
   </div>
 
@@ -1152,7 +1252,7 @@
       <div class="pipeline-icon">&#x1F50D;</div>
       <div class="pipeline-name">/pm-research</div>
       <p class="pipeline-desc">
-        Deep-dive into any product: features, App Store reviews, competitors, UI patterns, and design system extraction.
+        Deep-dive into any product: features, App Store reviews, competitors, UI patterns — automatically integrating Firecrawl, Claude, and web access tools.
       </p>
       <div class="pipeline-output">
         Output: <code>research-brief.md</code>
@@ -1164,7 +1264,7 @@
       <div class="pipeline-icon">&#x1F3AF;</div>
       <div class="pipeline-name">/pm-design</div>
       <p class="pipeline-desc">
-        Synthesize pain points, build behavioral frameworks, define personas with goal-first architecture.
+        Synthesize pain points, build behavioral frameworks, define personas with goal-first architecture — continuously digging into root causes via Five Whys analysis.
       </p>
       <div class="pipeline-output">
         Output: <code>design-spec.md</code> + <code>persona.md</code>
@@ -1176,7 +1276,7 @@
       <div class="pipeline-icon">&#x26A1;</div>
       <div class="pipeline-name">/pm-build</div>
       <p class="pipeline-desc">
-        Generate interactive React/JSX prototypes with iPhone framing. Zero-build, browser-ready demos.
+        Generate interactive React/JSX prototypes with iPhone framing. Zero-build, browser-ready demos — user stays in control at every checkpoint.
       </p>
       <div class="pipeline-output">
         Output: <code>preview.html</code> (live prototype)
@@ -1192,6 +1292,28 @@
       </p>
       <div class="pipeline-output">
         Output: <code>deliverables/</code> (email + blog + prompt)
+      </div>
+    </div>
+  </div>
+
+  <!-- Workflow Innovation Highlights -->
+  <div class="workflow-highlights reveal">
+    <div class="workflow-highlights-header">What makes this workflow different</div>
+    <div class="workflow-highlights-grid">
+      <div class="workflow-highlight-card">
+        <div class="wh-icon">&#x2699;</div>
+        <div class="wh-title">Automated Tool Integration</div>
+        <div class="wh-desc">Seamlessly orchestrates Firecrawl, Claude Code, web search, screenshot extraction, and more — one command triggers a coordinated research session across every tool you need.</div>
+      </div>
+      <div class="workflow-highlight-card">
+        <div class="wh-icon">&#x1F50D;</div>
+        <div class="wh-title">Deep Research &amp; Five Whys</div>
+        <div class="wh-desc">Never stops at surface-level data. It pulls user reviews, competitors' UI screenshots, and keeps digging into root causes — applying Five Whys analysis until the real problem is uncovered.</div>
+      </div>
+      <div class="workflow-highlight-card">
+        <div class="wh-icon">&#x1F6D1;</div>
+        <div class="wh-title">Human-in-the-Loop Checkpoints</div>
+        <div class="wh-desc">Key decisions stay with you. The workflow pauses at critical checkpoints — you authorize plans, approve designs, and inject your own judgment at every stage. No black boxes.</div>
       </div>
     </div>
   </div>
@@ -1323,40 +1445,14 @@
         <a href="https://whoop-sarah-prototype.vercel.app/" class="btn-primary" target="_blank">Try Live Prototype &rarr;</a>
       </div>
       <div class="case-visual">
-        <div class="case-phone">
-          <div class="case-phone-notch"></div>
-          <div class="case-phone-screen whoop-screen">
-            <div class="whoop-header-mock">
-              <div class="whoop-score">52%</div>
-              <div class="whoop-score-label">Recovery</div>
-            </div>
-            <div class="whoop-coach-bubble">
-              <div class="whoop-coach-name">Coach Marcus</div>
-              <div class="whoop-coach-text">Easy miles today, Sarah. 52% recovery means your body is still rebuilding. Trust the process &mdash; this protects race day.</div>
-            </div>
-            <div>
-              <div class="whoop-plan-item">
-                <span class="whoop-plan-time">6:30a</span>
-                <span class="whoop-plan-dot"></span>
-                <span class="whoop-plan-text">Light stretch + mobility</span>
-              </div>
-              <div class="whoop-plan-item">
-                <span class="whoop-plan-time">7:00a</span>
-                <span class="whoop-plan-dot"></span>
-                <span class="whoop-plan-text">Easy 4mi run (Z2 only)</span>
-              </div>
-              <div class="whoop-plan-item">
-                <span class="whoop-plan-time">12:00p</span>
-                <span class="whoop-plan-dot"></span>
-                <span class="whoop-plan-text">Recovery meal &mdash; 30g protein</span>
-              </div>
-              <div class="whoop-plan-item">
-                <span class="whoop-plan-time">9:30p</span>
-                <span class="whoop-plan-dot"></span>
-                <span class="whoop-plan-text">Wind-down &mdash; sleep by 10:30</span>
-              </div>
-            </div>
-          </div>
+        <div class="case-phone" style="width:300px; height:580px; background:#0a0a0f;">
+          <div class="case-phone-notch" style="width:140px;"></div>
+          <iframe
+            src="https://whoop-sarah-prototype.vercel.app/"
+            style="width:100%; height:100%; border:none; border-radius:34px;"
+            title="WHOOP AI Coach Prototype"
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
     </div>
