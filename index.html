@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Austin | AI Product Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: rgba(18, 18, 26, 0.7);
+      --text-primary: #f0f0f5;
+      --text-secondary: #8888a0;
+      --text-dim: #55556a;
+      --accent-blue: #4f8fff;
+      --accent-purple: #8b5cf6;
+      --accent-cyan: #06d6a0;
+      --accent-pink: #f472b6;
+      --accent-orange: #fb923c;
+      --gradient-hero: linear-gradient(135deg, #4f8fff 0%, #8b5cf6 50%, #f472b6 100%);
+      --gradient-card: linear-gradient(135deg, rgba(79,143,255,0.08) 0%, rgba(139,92,246,0.08) 100%);
+      --border-subtle: rgba(255,255,255,0.06);
+      --border-glow: rgba(79,143,255,0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── Animated Grid Background ─── */
+    .grid-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        linear-gradient(rgba(79,143,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,143,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .grid-bg::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(79,143,255,0.08) 0%, transparent 60%);
+    }
+
+    /* ─── Navbar ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(10,10,15,0.7);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 600;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-cyan);
+    }
+
+    .nav-status .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; box-shadow: 0 0 4px var(--accent-cyan); }
+      50% { opacity: 0.5; box-shadow: 0 0 12px var(--accent-cyan); }
+    }
+
+    /* ─── Sections ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      position: relative;
+    }
+
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 32px; height: 1px;
+      background: var(--accent-cyan);
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 .gradient-text {
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--gradient-hero);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(79,143,255,0.3);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 500;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 48px;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 700;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ─── Section Headers ─── */
+    .section-header {
+      margin-bottom: 64px;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent-purple);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* ─── Co-Pilot Pipeline ─── */
+    .copilot {
+      padding: 140px 40px;
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 60px;
+    }
+
+    .pipeline-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+
+    .pipeline-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--card-accent, var(--accent-blue));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .pipeline-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-glow);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .pipeline-card:hover::before { opacity: 1; }
+
+    .pipeline-step {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .pipeline-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      background: rgba(79,143,255,0.1);
+    }
+
+    .pipeline-card:nth-child(1) .pipeline-icon { background: rgba(79,143,255,0.12); }
+    .pipeline-card:nth-child(2) .pipeline-icon { background: rgba(139,92,246,0.12); }
+    .pipeline-card:nth-child(3) .pipeline-icon { background: rgba(6,214,160,0.12); }
+    .pipeline-card:nth-child(4) .pipeline-icon { background: rgba(251,146,60,0.12); }
+
+    .pipeline-card:nth-child(1) { --card-accent: var(--accent-blue); }
+    .pipeline-card:nth-child(2) { --card-accent: var(--accent-purple); }
+    .pipeline-card:nth-child(3) { --card-accent: var(--accent-cyan); }
+    .pipeline-card:nth-child(4) { --card-accent: var(--accent-orange); }
+
+    .pipeline-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .pipeline-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .pipeline-output {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .pipeline-output code {
+      color: var(--accent-cyan);
+    }
+
+    .pipeline-arrow {
+      display: none;
+    }
+
+    /* ─── Terminal Demo ─── */
+    .terminal-demo {
+      margin-top: 64px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .terminal-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot.red { background: #ff5f57; }
+    .terminal-dot.yellow { background: #ffbd2e; }
+    .terminal-dot.green { background: #28c840; }
+
+    .terminal-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-left: 12px;
+    }
+
+    .terminal-body {
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .terminal-prompt {
+      color: var(--accent-cyan);
+      user-select: none;
+    }
+
+    .terminal-cmd {
+      color: var(--text-primary);
+    }
+
+    .terminal-comment {
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .terminal-output {
+      color: var(--accent-purple);
+      padding-left: 24px;
+    }
+
+    /* ─── Case Studies ─── */
+    .case-studies {
+      padding: 140px 40px;
+    }
+
+    .cases-grid {
+      display: grid;
+      gap: 40px;
+    }
+
+    .case-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 48px;
+      backdrop-filter: blur(12px);
+      transition: all 0.4s;
+    }
+
+    .case-card:hover {
+      border-color: var(--border-glow);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.3);
+    }
+
+    .case-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      background: rgba(6,214,160,0.1);
+      padding: 6px 14px;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .case-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .case-subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .case-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .case-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+    }
+
+    .case-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 28px;
+    }
+
+    .case-stat-value {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .case-stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .case-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .case-phone {
+      position: relative;
+      width: 260px;
+      height: 520px;
+      background: #1a1a2e;
+      border-radius: 36px;
+      border: 3px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 20px 60px rgba(0,0,0,0.5),
+        0 0 120px rgba(79,143,255,0.08);
+    }
+
+    .case-phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background: #0a0a0f;
+      border-radius: 0 0 20px 20px;
+      z-index: 2;
+    }
+
+    .case-phone-screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 40px 20px 20px;
+    }
+
+    /* Whoop phone mockup */
+    .whoop-screen {
+      background: linear-gradient(180deg, #0f1923 0%, #0a1018 100%);
+    }
+
+    .whoop-header-mock {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .whoop-score {
+      font-family: var(--font-mono);
+      font-size: 48px;
+      font-weight: 800;
+      color: #44d62c;
+      line-height: 1;
+    }
+
+    .whoop-score-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .whoop-coach-bubble {
+      background: rgba(68,214,44,0.08);
+      border: 1px solid rgba(68,214,44,0.15);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .whoop-coach-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: #44d62c;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .whoop-coach-text {
+      font-size: 11px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .whoop-plan-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .whoop-plan-time {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      width: 48px;
+    }
+
+    .whoop-plan-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .whoop-plan-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #44d62c;
+      flex-shrink: 0;
+    }
+
+    /* BoldVoice phone mockup */
+    .bv-screen {
+      background: linear-gradient(180deg, #1a0a2e 0%, #0d0518 100%);
+    }
+
+    .bv-waveform {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      height: 60px;
+      margin-bottom: 16px;
+    }
+
+    .bv-bar {
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #8b5cf6, #f472b6);
+      animation: bv-wave 1.2s ease-in-out infinite;
+    }
+
+    @keyframes bv-wave {
+      0%, 100% { height: 12px; }
+      50% { height: var(--h, 40px); }
+    }
+
+    .bv-word-row {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .bv-word {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .bv-word.correct { color: #34d399; }
+    .bv-word.incorrect { color: #f87171; background: rgba(248,113,113,0.1); }
+    .bv-word.neutral { color: rgba(255,255,255,0.6); }
+
+    .bv-feedback {
+      background: rgba(139,92,246,0.1);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .bv-feedback-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .bv-feedback-text {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    .bv-progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+
+    .bv-progress-fill {
+      height: 100%;
+      width: 68%;
+      background: linear-gradient(90deg, #8b5cf6, #f472b6);
+      border-radius: 4px;
+    }
+
+    /* ─── Approach / About ─── */
+    .approach {
+      padding: 140px 40px;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+    }
+
+    .approach-text {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .approach-text p {
+      margin-bottom: 20px;
+    }
+
+    .approach-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .approach-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .highlight-card {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.3s;
+    }
+
+    .highlight-card:hover {
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .highlight-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      width: 48px;
+      text-align: center;
+    }
+
+    .highlight-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .highlight-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ─── Contact / Footer ─── */
+    .contact {
+      padding: 140px 40px 80px;
+      text-align: center;
+    }
+
+    .contact-cta {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .contact-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      transition: all 0.3s;
+    }
+
+    .contact-link:hover {
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.03);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    footer p {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* ─── Scroll Animations ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section, .copilot, .case-studies, .approach, .contact { padding-left: 24px; padding-right: 24px; }
+
+      .pipeline { grid-template-columns: 1fr 1fr; }
+      .case-card { grid-template-columns: 1fr; padding: 32px; }
+      .case-visual { order: -1; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .hero-metrics { flex-wrap: wrap; gap: 32px; }
+      .hero-photo { position: static; transform: none; margin-bottom: 32px; text-align: center; }
+      .hero-avatar { width: 160px; height: 160px; }
+      .principle-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── Hero Photo ─── */
+    .hero-photo {
+      position: absolute;
+      right: 40px;
+      top: 120px;
+    }
+
+    .hero-avatar, .hero-avatar-placeholder {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 80px rgba(79,143,255,0.15), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .hero-avatar {
+      object-fit: cover;
+      object-position: center 20%;
+      clip-path: circle(50%);
+    }
+
+    .hero-avatar-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 56px;
+      font-weight: 700;
+      background: linear-gradient(135deg, rgba(79,143,255,0.15) 0%, rgba(139,92,246,0.15) 100%);
+      color: var(--text-secondary);
+      letter-spacing: 4px;
+    }
+
+    /* ─── Design Principles ─── */
+    .case-section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .case-design-principles {
+      margin-bottom: 24px;
+    }
+
+    .principle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .principle {
+      padding: 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+    }
+
+    .principle-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .principle-desc {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .case-persona-card {
+      margin-bottom: 24px;
+      padding: 18px;
+      background: rgba(6,214,160,0.04);
+      border: 1px solid rgba(6,214,160,0.12);
+      border-radius: 12px;
+    }
+
+    .persona-detail p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .persona-detail p:last-child { margin-bottom: 0; }
+
+    .persona-detail em {
+      color: var(--accent-cyan);
+      font-style: italic;
+    }
+
+    .persona-detail strong {
+      color: var(--text-primary);
+    }
+
+    /* ─── GitHub Install Block ─── */
+    .install-block {
+      margin-top: 40px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .install-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .install-badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+    }
+
+    .install-gh-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .install-gh-link:hover { color: var(--text-primary); }
+
+    .install-code {
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .install-line {
+      color: var(--text-primary);
+    }
+
+    .install-prompt {
+      color: var(--accent-cyan);
+      margin-right: 8px;
+    }
+
+    .install-comment {
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      .pipeline { grid-template-columns: 1fr; }
+      .hero-metrics { gap: 24px; }
+      .metric-value { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- ─── Navbar ─── -->
+<nav>
+  <div class="nav-logo">austin.pm</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Claude Skills</a></li>
+    <li><a href="#prototypes">Prototypes</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status">
+    <span class="dot"></span>
+    Open to opportunities
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero">
+  <div class="hero-photo">
+    <div class="hero-avatar-placeholder" id="avatar-container">AW</div>
+    <img src="Personal_Harvard.JPG" alt="Austin" class="hero-avatar" id="avatar-img" style="display:none" />
+  </div>
+  <div class="hero-tag">AI Product Manager</div>
+  <h1>
+    I turn frontier AI<br>
+    into <span class="gradient-text">products people use.</span>
+  </h1>
+  <p class="hero-desc">
+    HBS MBA candidate building at the intersection of AI and consumer products. I design, prototype, and ship AI-native experiences &mdash; from concept to interactive demo in hours, not months.
+  </p>
+  <div class="hero-cta-row">
+    <a href="#prototypes" class="btn-primary">View Prototypes &darr;</a>
+    <a href="#skills" class="btn-ghost">See My Claude Skills</a>
+  </div>
+  <div class="hero-metrics">
+    <div class="metric">
+      <span class="metric-value">4</span>
+      <span class="metric-label">Skills Pipeline</span>
+    </div>
+    <div class="metric">
+      <span class="metric-value">3+</span>
+      <span class="metric-label">AI Prototypes Built</span>
+    </div>
+    <div class="metric">
+      <span class="metric-value">HBS '27</span>
+      <span class="metric-label">Harvard MBA</span>
+    </div>
+    <div class="metric">
+      <span class="metric-value">&lt; 4hrs</span>
+      <span class="metric-label">Concept &rarr; Prototype</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Prototype Co-Pilot ─── -->
+<section class="copilot" id="skills">
+  <div class="section-header reveal">
+    <div class="section-tag">// Claude Skills</div>
+    <h2 class="section-title">Prototype Co-Pilot:<br>a PM workflow, automated.</h2>
+    <p class="section-subtitle">
+      Four AI-powered Claude Code skills that chain together into a complete product design pipeline. Research to deliverables in a single session.
+    </p>
+    <a href="https://github.com/auwangcodex/prototype-copilot" class="btn-ghost" target="_blank" style="margin-top:20px;">&#x1F4BB; View on GitHub &rarr;</a>
+  </div>
+
+  <div class="pipeline reveal">
+    <div class="pipeline-card">
+      <div class="pipeline-step">Step 01</div>
+      <div class="pipeline-icon">&#x1F50D;</div>
+      <div class="pipeline-name">/pm-research</div>
+      <p class="pipeline-desc">
+        Deep-dive into any product: features, App Store reviews, competitors, UI patterns, and design system extraction.
+      </p>
+      <div class="pipeline-output">
+        Output: <code>research-brief.md</code>
+      </div>
+    </div>
+
+    <div class="pipeline-card">
+      <div class="pipeline-step">Step 02</div>
+      <div class="pipeline-icon">&#x1F3AF;</div>
+      <div class="pipeline-name">/pm-design</div>
+      <p class="pipeline-desc">
+        Synthesize pain points, build behavioral frameworks, define personas with goal-first architecture.
+      </p>
+      <div class="pipeline-output">
+        Output: <code>design-spec.md</code> + <code>persona.md</code>
+      </div>
+    </div>
+
+    <div class="pipeline-card">
+      <div class="pipeline-step">Step 03</div>
+      <div class="pipeline-icon">&#x26A1;</div>
+      <div class="pipeline-name">/pm-build</div>
+      <p class="pipeline-desc">
+        Generate interactive React/JSX prototypes with iPhone framing. Zero-build, browser-ready demos.
+      </p>
+      <div class="pipeline-output">
+        Output: <code>preview.html</code> (live prototype)
+      </div>
+    </div>
+
+    <div class="pipeline-card">
+      <div class="pipeline-step">Step 04</div>
+      <div class="pipeline-icon">&#x1F4E6;</div>
+      <div class="pipeline-name">/pm-package</div>
+      <p class="pipeline-desc">
+        Auto-generate stakeholder emails, blog posts, and Lovable.dev build prompts from your prototype.
+      </p>
+      <div class="pipeline-output">
+        Output: <code>deliverables/</code> (email + blog + prompt)
+      </div>
+    </div>
+  </div>
+
+  <!-- Terminal Demo -->
+  <div class="terminal-demo reveal">
+    <div class="terminal-header">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">prototype-copilot &mdash; claude code</span>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span class="terminal-cmd">/pm-research WHOOP --idea "AI coaching agent"</span>
+      </div>
+      <div class="terminal-output">&rarr; research-brief.md (57K) + design-tokens.md</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span class="terminal-cmd">/pm-design WHOOP</span>
+      </div>
+      <div class="terminal-output">&rarr; design-spec.md + persona-austin.md</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span class="terminal-cmd">/pm-build austin --project WHOOP</span>
+      </div>
+      <div class="terminal-output">&rarr; preview.html (interactive prototype, open in browser)</div>
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span class="terminal-cmd">/pm-package --format all --project WHOOP</span>
+      </div>
+      <div class="terminal-output">&rarr; deliverables/ (stakeholder_email.md + blog_post.md + lovable_build_prompt.md)</div>
+    </div>
+  </div>
+
+  <!-- GitHub Install Block -->
+  <div class="install-block reveal">
+    <div class="install-header">
+      <span class="install-badge">&#x1F4E5; Quick Install</span>
+      <a href="https://github.com/auwangcodex/prototype-copilot" target="_blank" class="install-gh-link">github.com/auwangcodex/prototype-copilot &rarr;</a>
+    </div>
+    <div class="install-code">
+      <div class="install-line"><span class="install-comment"># Clone the skills</span></div>
+      <div class="install-line"><span class="install-prompt">$</span> git clone https://github.com/auwangcodex/prototype-copilot.git ~/pm-skills</div>
+      <div class="install-line"><span class="install-prompt">$</span> cd ~/pm-skills && ./install.sh</div>
+      <div class="install-line">&nbsp;</div>
+      <div class="install-line"><span class="install-comment"># Start building prototypes</span></div>
+      <div class="install-line"><span class="install-prompt">$</span> claude</div>
+      <div class="install-line"><span class="install-prompt">&gt;</span> <span style="color:var(--accent-cyan)">/pm-research</span> WHOOP --idea "AI coaching agent"</div>
+      <div class="install-line"><span class="install-prompt">&gt;</span> <span style="color:var(--accent-purple)">/pm-design</span> WHOOP</div>
+      <div class="install-line"><span class="install-prompt">&gt;</span> <span style="color:var(--accent-cyan)">/pm-build</span> sarah --project WHOOP</div>
+      <div class="install-line"><span class="install-prompt">&gt;</span> <span style="color:var(--accent-orange)">/pm-package</span> --format all --project WHOOP</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Case Studies ─── -->
+<section class="case-studies" id="prototypes">
+  <div class="section-header reveal">
+    <div class="section-tag">// Prototypes</div>
+    <h2 class="section-title">Real products.<br>Real prototypes.</h2>
+    <p class="section-subtitle">
+      Each project goes through the full Prototype Co-Pilot pipeline &mdash; from market research to interactive demo. More coming soon.
+    </p>
+  </div>
+
+  <div class="cases-grid">
+    <!-- WHOOP AI Coach -->
+    <div class="case-card reveal">
+      <div class="case-info">
+        <div class="case-badge">&#x1F3CB;&#xFE0F; Health & Fitness &times; AI Agent</div>
+        <h3 class="case-title">WHOOP AI Coach</h3>
+        <p class="case-subtitle">
+          A personalized AI wellness agent that transforms WHOOP's biometric data into daily action plans. Instead of just showing "recovery 52%," it tells you exactly what to do, when, and why &mdash; adapted to your specific goals and body patterns.
+        </p>
+
+        <div class="case-design-principles">
+          <h4 class="case-section-title">Design Principles</h4>
+          <div class="principle-grid">
+            <div class="principle">
+              <span class="principle-label">Goals First</span>
+              <span class="principle-desc">Every screen element connects to the user's stated goal. Not features-first &mdash; outcomes-first.</span>
+            </div>
+            <div class="principle">
+              <span class="principle-label">6-Stage Loop</span>
+              <span class="principle-desc">Set Goal &rarr; Morning Briefing &rarr; Active Coaching &rarr; Logging &rarr; Evening Review &rarr; Adaptation</span>
+            </div>
+            <div class="principle">
+              <span class="principle-label">Personalized Coach</span>
+              <span class="principle-desc">Three AI personalities matched to user type: Aria (optimizer), Marcus (athlete), Zen (executive).</span>
+            </div>
+            <div class="principle">
+              <span class="principle-label">Close the Loop</span>
+              <span class="principle-desc">Most apps give data. This coach tracks adherence, correlates behaviors with outcomes, and learns what works for YOU.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-persona-card">
+          <h4 class="case-section-title">Featured Persona: Sarah</h4>
+          <div class="persona-detail">
+            <p><strong>Sarah, 28</strong> &mdash; Marketing manager training for her first marathon. Goal: "Complete marathon injury-free while improving my time."</p>
+            <p>Coach Marcus guides her with patience and injury-prevention focus: <em>"52% recovery means easy miles today. Trust the process &mdash; this is how we stay healthy for race day."</em></p>
+          </div>
+        </div>
+
+        <div class="case-tags">
+          <span class="case-tag">AI Agent</span>
+          <span class="case-tag">LLM Personalization</span>
+          <span class="case-tag">Behavioral Design</span>
+          <span class="case-tag">Goal-Action Loop</span>
+          <span class="case-tag">6-Stage Framework</span>
+        </div>
+        <div class="case-stats">
+          <div>
+            <div class="case-stat-value">6-Stage</div>
+            <div class="case-stat-label">Behavioral Loop</div>
+          </div>
+          <div>
+            <div class="case-stat-value">3</div>
+            <div class="case-stat-label">Coach Personas</div>
+          </div>
+          <div>
+            <div class="case-stat-value">30+</div>
+            <div class="case-stat-label">User Interviews</div>
+          </div>
+        </div>
+        <a href="https://whoop-sarah-prototype.vercel.app/" class="btn-primary" target="_blank">Try Live Prototype &rarr;</a>
+      </div>
+      <div class="case-visual">
+        <div class="case-phone">
+          <div class="case-phone-notch"></div>
+          <div class="case-phone-screen whoop-screen">
+            <div class="whoop-header-mock">
+              <div class="whoop-score">52%</div>
+              <div class="whoop-score-label">Recovery</div>
+            </div>
+            <div class="whoop-coach-bubble">
+              <div class="whoop-coach-name">Coach Marcus</div>
+              <div class="whoop-coach-text">Easy miles today, Sarah. 52% recovery means your body is still rebuilding. Trust the process &mdash; this protects race day.</div>
+            </div>
+            <div>
+              <div class="whoop-plan-item">
+                <span class="whoop-plan-time">6:30a</span>
+                <span class="whoop-plan-dot"></span>
+                <span class="whoop-plan-text">Light stretch + mobility</span>
+              </div>
+              <div class="whoop-plan-item">
+                <span class="whoop-plan-time">7:00a</span>
+                <span class="whoop-plan-dot"></span>
+                <span class="whoop-plan-text">Easy 4mi run (Z2 only)</span>
+              </div>
+              <div class="whoop-plan-item">
+                <span class="whoop-plan-time">12:00p</span>
+                <span class="whoop-plan-dot"></span>
+                <span class="whoop-plan-text">Recovery meal &mdash; 30g protein</span>
+              </div>
+              <div class="whoop-plan-item">
+                <span class="whoop-plan-time">9:30p</span>
+                <span class="whoop-plan-dot"></span>
+                <span class="whoop-plan-text">Wind-down &mdash; sleep by 10:30</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── About / Approach ─── -->
+<section class="approach" id="about">
+  <div class="section-header reveal">
+    <div class="section-tag">// About</div>
+    <h2 class="section-title">Growth product leader.<br>Now building with AI.</h2>
+    <p class="section-subtitle">
+      From scaling 0-to-100K DAU at an a16z AI startup to prototyping AI agents at HBS.
+    </p>
+  </div>
+
+  <div class="approach-grid reveal">
+    <div class="approach-text">
+      <p>
+        Most recently I was <strong>Head of Growth Product at Sekai</strong>, an a16z-backed AI entertainment startup in San Francisco, where I scaled DAU from 0 to 100K+ and lifted D1 retention from 12% to 30% &mdash; designing onboarding flows, building LLM-based recommendation systems for cold-start users, and launching features like roleplay with memory and dynamic storylines.
+      </p>
+      <p>
+        Before that I led <strong>global paid-marketing strategy at ByteDance</strong> (delivering 10K daily new users for TikTok's e-commerce initiative) and was a <strong>founding member of Chi Forest's U.S. DTC business</strong>, scaling it from zero to $1.5M annual revenue.
+      </p>
+      <p>
+        Now at <strong>HBS (MBA '27)</strong>, I'm channeling that growth product instinct into AI-native tools. <strong>Prototype Co-Pilot</strong> lets me go from product idea to interactive prototype in a single session &mdash; bridging the gap between user understanding and technical execution.
+      </p>
+      <p>
+        I'm looking for <strong>product management roles in AI</strong> &mdash; consumer AI, AI agents, and frontier applications where the product thinking matters as much as the technology.
+      </p>
+    </div>
+    <div class="approach-highlights">
+      <div class="highlight-card">
+        <div class="highlight-icon">&#x1F680;</div>
+        <div>
+          <div class="highlight-title">Sekai &mdash; Head of Growth Product</div>
+          <div class="highlight-desc">a16z portfolio. Scaled 0&rarr;100K DAU. Built LLM recommendation systems, onboarding flows, and AI content agents.</div>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">&#x1F4F1;</div>
+        <div>
+          <div class="highlight-title">ByteDance &mdash; Global Strategy</div>
+          <div class="highlight-desc">Led TikTok e-commerce acquisition. 10K daily new users. A/B tested across product, promo, content, and format dimensions.</div>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">&#x1F393;</div>
+        <div>
+          <div class="highlight-title">Harvard Business School '27</div>
+          <div class="highlight-desc">MBA candidate, Section I. Tech Club, AI Club. HKUST Quantitative Finance (First Class Honors).</div>
+        </div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-icon">&#x1F916;</div>
+        <div>
+          <div class="highlight-title">AI-Native Builder</div>
+          <div class="highlight-desc">Built Claude Code skills, automated PM workflows, and ships interactive AI prototypes. Exploring robotics and physical AI.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ─── -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <h2 class="contact-cta">Let's build something <span class="gradient-text">at the frontier.</span></h2>
+    <p class="contact-desc">Open to PM roles in AI, agent systems, and consumer tech.</p>
+    <div class="contact-links">
+      <a href="mailto:auwang@mba2027.hbs.edu" class="contact-link">&#x2709;&#xFE0F; auwang@mba2027.hbs.edu</a>
+      <a href="https://www.linkedin.com/in/austin-chen-wang-0b3161149/" class="contact-link" target="_blank">&#x1F4BC; LinkedIn</a>
+      <a href="https://github.com/auwangcodex" class="contact-link" target="_blank">&#x1F4BB; GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Austin. Built with Prototype Co-Pilot + Claude Code.</p>
+</footer>
+
+<script>
+  // Scroll reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Photo swap: show real photo if available, otherwise keep placeholder
+  const avatarImg = document.getElementById('avatar-img');
+  const avatarContainer = document.getElementById('avatar-container');
+  avatarImg.onload = function() {
+    avatarContainer.style.display = 'none';
+    avatarImg.style.display = 'block';
+  };
+  avatarImg.src = 'Personal_Harvard.JPG';
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
