@@ -1089,6 +1089,41 @@
     }
 
     /* ─── Workflow Highlights — List layout (manifesto / overview) ─── */
+    .workflow-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+    }
+
+    .pill.cyan {
+      color: var(--accent-cyan);
+      background: rgba(6,214,160,0.08);
+      border: 1px solid rgba(6,214,160,0.2);
+    }
+
+    .pill.purple {
+      color: var(--accent-purple);
+      background: rgba(139,92,246,0.08);
+      border: 1px solid rgba(139,92,246,0.2);
+    }
+
+    .pill.orange {
+      color: var(--accent-orange);
+      background: rgba(251,146,60,0.08);
+      border: 1px solid rgba(251,146,60,0.2);
+    }
+
     .workflow-highlights {
       margin-top: 64px;
       background: var(--bg-card);
@@ -1239,11 +1274,11 @@
     <p class="section-subtitle">
       Four AI-powered Claude Code skills that chain together into a complete product design pipeline. Research to deliverables in a single session.
     </p>
-    <p class="section-subtitle" style="margin-top:-16px; margin-bottom:20px; font-size:15px; color:var(--text-dim);">
-      <span style="color:var(--accent-cyan); font-weight:600;">&#x2699; Automated workflow</span> &nbsp;&middot;&nbsp;
-      <span style="color:var(--accent-purple); font-weight:600;">&#x1F50D; Deep research &amp; Five Whys analysis</span> &nbsp;&middot;&nbsp;
-      <span style="color:var(--accent-orange); font-weight:600;">&#x1F6D1; Human-in-the-loop checkpoints</span>
-    </p>
+    <div class="workflow-pills">
+      <span class="pill cyan">&#x2699; Automated workflow</span>
+      <span class="pill purple">&#x1F50D; Deep research &amp; Five Whys</span>
+      <span class="pill orange">&#x1F6D1; Human-in-the-loop checkpoints</span>
+    </div>
     <a href="https://github.com/auwangcodex/prototype-copilot" class="btn-ghost" target="_blank" style="margin-top:20px;">&#x1F4BB; View on GitHub &rarr;</a>
   </div>
 
