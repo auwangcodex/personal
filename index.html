@@ -1088,7 +1088,7 @@
       .metric-value { font-size: 22px; }
     }
 
-    /* ─── Workflow Highlights ─── */
+    /* ─── Workflow Highlights — List layout (manifesto / overview) ─── */
     .workflow-highlights {
       margin-top: 64px;
       background: var(--bg-card);
@@ -1100,56 +1100,69 @@
 
     .workflow-highlights-header {
       font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--accent-cyan);
+      font-size: 11px;
+      color: var(--accent-blue);
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 28px;
-      text-align: center;
+      letter-spacing: 3px;
+      margin-bottom: 36px;
+      font-weight: 500;
     }
 
-    .workflow-highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .workflow-highlight-card {
+    .workflow-highlights-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 0;
     }
 
-    .wh-icon {
-      font-size: 28px;
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+    .workflow-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 24px 0;
+    }
+
+    .workflow-list-sep {
+      height: 1px;
+      background: var(--border-subtle);
+    }
+
+    .whi-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      background: rgba(79,143,255,0.08);
+      border: 1px solid rgba(79,143,255,0.15);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(79,143,255,0.1);
+      flex-shrink: 0;
+      letter-spacing: 0;
     }
 
-    .workflow-highlight-card:nth-child(1) .wh-icon { background: rgba(79,143,255,0.12); }
-    .workflow-highlight-card:nth-child(2) .wh-icon { background: rgba(139,92,246,0.12); }
-    .workflow-highlight-card:nth-child(3) .wh-icon { background: rgba(251,146,60,0.12); }
+    .whi-content {
+      flex: 1;
+    }
 
-    .wh-title {
-      font-size: 16px;
+    .whi-title {
+      font-size: 17px;
       font-weight: 700;
       color: var(--text-primary);
+      margin-bottom: 6px;
       letter-spacing: -0.2px;
     }
 
-    .wh-desc {
+    .whi-desc {
       font-size: 14px;
       color: var(--text-secondary);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     @media (max-width: 768px) {
-      .workflow-highlights-grid { grid-template-columns: 1fr; }
+      .workflow-list-item { flex-direction: column; gap: 12px; }
       .workflow-highlights { padding: 28px; }
     }
   </style>
@@ -1204,16 +1217,8 @@
   </div>
   <div class="hero-metrics">
     <div class="metric">
-      <span class="metric-value">4</span>
-      <span class="metric-label">Skills Pipeline</span>
-    </div>
-    <div class="metric">
       <span class="metric-value">&lt; 4hrs</span>
       <span class="metric-label">Concept &rarr; Prototype</span>
-    </div>
-    <div class="metric">
-      <span class="metric-value">100K+</span>
-      <span class="metric-label">DAU Scaled (Sekai)</span>
     </div>
     <div class="metric">
       <span class="metric-value">30%</span>
@@ -1222,10 +1227,6 @@
     <div class="metric">
       <span class="metric-value">HBS '27</span>
       <span class="metric-label">Harvard MBA</span>
-    </div>
-    <div class="metric">
-      <span class="metric-value">&lt; 4hrs</span>
-      <span class="metric-label">Concept &rarr; Prototype</span>
     </div>
   </div>
 </section>
@@ -1299,21 +1300,29 @@
   <!-- Workflow Innovation Highlights -->
   <div class="workflow-highlights reveal">
     <div class="workflow-highlights-header">What makes this workflow different</div>
-    <div class="workflow-highlights-grid">
-      <div class="workflow-highlight-card">
-        <div class="wh-icon">&#x2699;</div>
-        <div class="wh-title">Automated Tool Integration</div>
-        <div class="wh-desc">Seamlessly orchestrates Firecrawl, Claude Code, web search, screenshot extraction, and more — one command triggers a coordinated research session across every tool you need.</div>
+    <div class="workflow-highlights-list">
+      <div class="workflow-list-item">
+        <div class="whi-number">01</div>
+        <div class="whi-content">
+          <div class="whi-title">Automated Tool Orchestration</div>
+          <div class="whi-desc">One command triggers a coordinated research session across Firecrawl, Claude Code, web search, screenshot extraction — every tool working together.</div>
+        </div>
       </div>
-      <div class="workflow-highlight-card">
-        <div class="wh-icon">&#x1F50D;</div>
-        <div class="wh-title">Deep Research &amp; Five Whys</div>
-        <div class="wh-desc">Never stops at surface-level data. It pulls user reviews, competitors' UI screenshots, and keeps digging into root causes — applying Five Whys analysis until the real problem is uncovered.</div>
+      <div class="workflow-list-sep"></div>
+      <div class="workflow-list-item">
+        <div class="whi-number">02</div>
+        <div class="whi-content">
+          <div class="whi-title">Deep Research &amp; Five Whys</div>
+          <div class="whi-desc">Never stops at surface data. Keeps digging into root causes — pulling user reviews, competitor UIs, behavioral patterns — until the real problem is uncovered.</div>
+        </div>
       </div>
-      <div class="workflow-highlight-card">
-        <div class="wh-icon">&#x1F6D1;</div>
-        <div class="wh-title">Human-in-the-Loop Checkpoints</div>
-        <div class="wh-desc">Key decisions stay with you. The workflow pauses at critical checkpoints — you authorize plans, approve designs, and inject your own judgment at every stage. No black boxes.</div>
+      <div class="workflow-list-sep"></div>
+      <div class="workflow-list-item">
+        <div class="whi-number">03</div>
+        <div class="whi-content">
+          <div class="whi-title">Human-in-the-Loop Checkpoints</div>
+          <div class="whi-desc">Key decisions stay with you. The workflow pauses at critical points — you authorize plans, approve designs, inject your own judgment. No black boxes.</div>
+        </div>
       </div>
     </div>
   </div>
